@@ -64,7 +64,7 @@ pytesseract==0.3.10
 python-bidi==0.4.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
-pywin32==306
+pywin32
 PyYAML==6.0.1
 requests==2.32.3
 rich==13.7.1
