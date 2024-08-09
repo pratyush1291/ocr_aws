@@ -66,7 +66,7 @@ python-dateutil==2.9.0.post0
 pytz
 requests==2.32.3
 scikit-image==0.24.0
-scipy==1.14.0
+scipy
 setuptools==70.0.0
 tensorboard==2.16.2
 tensorboard-data-server==0.7.2
