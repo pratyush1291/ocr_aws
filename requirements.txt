@@ -72,8 +72,8 @@ tensorboard==2.16.2
 tensorboard-data-server==0.7.2
 tensorflow==2.16.1
 torch==2.3.1+cu118
-torchaudio==2.3.1+cu118
-torchvision==0.18.1
+torchaudio
+torchvision
 urllib3==2.2.1
 Werkzeug==3.0.3
 wheel==0.43.0
