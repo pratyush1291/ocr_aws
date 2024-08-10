@@ -28,9 +28,9 @@ import re
 
 # reader = easyocr.Reader(['en'], recog_network='en_sample')
 # reader1 = easyocr.Reader(['en'])
-pytesseract.pytesseract.tesseract_cmd = r'D:\Tesseract-OCR\Tesseract-OCR\tesseract.exe'
+#pytesseract.pytesseract.tesseract_cmd = r'D:\Tesseract-OCR\Tesseract-OCR\tesseract.exe'
 
-
+pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
 
 
 
@@ -83,11 +83,11 @@ def process_image(img_path):
                     cv2.imwrite(output_path, cropped_table)
                     cv2.drawContours(image, [contour], -1, (0, 255, 0), 2)
 
-            directory = "D:/ocr_production_hosting/pdf"
+            directory = "/home/ec2-user/pdf"
             items = os.listdir(directory)
 
             for k in range(len(items)):
-                directory2 = f"D:/ocr_production_hosting/images/unorder_output_image_{k}"
+                directory2 = f"/home/ec2-user/images/unorder_output_image_{k}"
                 os.makedirs(directory2, exist_ok=True)
                 for r in range(len(os.listdir(directory2))):
                     image_path = os.path.join(directory2, f'cropped_table_{r}.png')
@@ -101,8 +101,8 @@ def process_image(img_path):
 
                     cropped_image = image[y:y + height, x:x + width]
                     cropped_image_house=image[y1:y1 + height1, x1:x1 + width1]
-                    directory3 = f"D:/ocr_production_hosting/voter_number/unorder_output_image_number{k}"
-                    directory_house = f"D:/ocr_production_hosting/house_number/unorder_output_image_number{k}"
+                    directory3 = f"home/ec2-user/voter_number/unorder_output_image_number{k}"
+                    directory_house = f"home/ec2-user/house_number/unorder_output_image_number{k}"
 
                     os.makedirs(directory3, exist_ok=True)
                     os.makedirs(directory_house, exist_ok=True)
@@ -149,11 +149,11 @@ def process_image_english(img_path):
                     cv2.imwrite(output_path, cropped_table)
                     cv2.drawContours(image, [contour], -1, (0, 255, 0), 2)
 
-            directory = "D:/ocr_production_hosting/pdf"
+            directory = "home/ec2-user/pdf"
             items = os.listdir(directory)
 
             for k in range(len(items)):
-                directory2 = f"D:/ocr_production_hosting/images/unorder_output_image_{k}"
+                directory2 = f"home/ec2-user/images/unorder_output_image_{k}"
                 os.makedirs(directory2, exist_ok=True)
                 for r in range(len(os.listdir(directory2))):
                     image_path = os.path.join(directory2, f'cropped_table_{r}.png')
@@ -167,7 +167,7 @@ def process_image_english(img_path):
 
                     cropped_image = image[y:y + height, x:x + width]
 
-                    directory3 = f"D:/ocr_production_hosting/voter_number/unorder_output_image_number{k}"
+                    directory3 = f"home/ec2-user/voter_number/unorder_output_image_number{k}"
 
 
                     os.makedirs(directory3, exist_ok=True)
@@ -437,7 +437,7 @@ def pooling_stations(args):
             section = matchnew.group(1).strip()
 
 
-        new_dir="D:/ocr_production_hosting/pdf"
+        new_dir="home/ec2-user/pdf"
         count = count_files(new_dir)
         count = int(count)
         directory =imgpath2
@@ -666,7 +666,7 @@ def pooling_stations_hindi(args):
         section = missing
     else:
         section = match4.group(1).strip()
-    new_dir="D:/ocr_production_hosting/pdf"
+    new_dir="home/ec2-user/pdf"
     count = count_files(new_dir)
     count = int(count)
     directory =imgpath2
@@ -802,7 +802,7 @@ def upload_file():
 
     if language=="english":
         start=datetime.now()
-        dir = "D:/ocr_production_hosting/data"
+        dir = "home/ec2-user/data"
         os.makedirs(dir,exist_ok=True)
         print("i am here")
 
@@ -816,7 +816,7 @@ def upload_file():
         data_frames2=[]
         data_frame_voter = []
 
-        directory_d = 'D:/ocr_production_hosting/data'
+        directory_d = 'home/ec2-user/data'
         combined_df = pd.DataFrame()
 
         total_pdfs = []
@@ -1104,9 +1104,9 @@ def upload_file():
             pool2 = Pool()
             try:
 
-                imgpath = [f"D:/ocr_production_hosting/pdf/output_image_{i}.png" for i in range(count)]
+                imgpath = [f"home/ec2-user/pdf/output_image_{i}.png" for i in range(count)]
 
-                imgpath2 = [f"D:/ocr_production_hosting/images/unorder_output_image_{i}" for i in range(count)]
+                imgpath2 = [f"home/ec2-user/images/unorder_output_image_{i}" for i in range(count)]
 
                 args_list = list(zip(imgpath, imgpath2))
 
@@ -1161,10 +1161,10 @@ def upload_file():
 
 
 
-            shutil.rmtree('D:/ocr_production_hosting/images')
-            shutil.rmtree('D:/ocr_production_hosting/voter_number')
+            shutil.rmtree('home/ec2-user/images')
+            shutil.rmtree('home/ec2-user/voter_number')
             #shutil.rmtree('D:/ocr_production_hosting/house_number')
-            dir2 = "D:/ocr_production_hosting/pdf"
+            dir2 = "home/ec2-user/pdf"
             shutil.rmtree(dir2)
             end=datetime.now()
             print("total time for image processing",end-start)
@@ -1181,8 +1181,8 @@ def upload_file():
         final_df3 = pd.concat(data_frame_voter, ignore_index=True)
         final_df3.to_excel('epic_number.xlsx', index=False)
 
-        shutil.rmtree('D:/ocr_production_hosting/data')
-        dir = "D:/ocr_production_hosting/data"
+        shutil.rmtree('home/ec2-user/data')
+        dir = "home/ec2-user/data"
         os.makedirs(dir, exist_ok=True)
 
 
@@ -1211,7 +1211,7 @@ def upload_file():
         pattern=[]
         counter=0
 
-        directory_d = 'D:/ocr_production_hosting/data'
+        directory_d = 'home/ec2-user/data'
         combined_df = pd.DataFrame()
 
         total_pdfs = []
@@ -1570,10 +1570,10 @@ def upload_file():
 
 
 
-            imgpath = [f"D:/ocr_production_hosting/pdf/output_image_{i}.png" for i in range(count)]
+            imgpath = [f"home/ec2-user/output_image_{i}.png" for i in range(count)]
 
 
-            imgpath2 = [f"D:/ocr_production_hosting/images/unorder_output_image_{i}" for i in range(count)]
+            imgpath2 = [f"home/ec2-user/unorder_output_image_{i}" for i in range(count)]
 
 
             args_list = list(zip(imgpath, imgpath2))
@@ -1632,11 +1632,11 @@ def upload_file():
             data_frames2.append(df_combined)
 
 
-            shutil.rmtree('D:/ocr_production_hosting/images')
-            shutil.rmtree('D:/ocr_production_hosting/voter_number')
-            shutil.rmtree('D:/ocr_production_hosting/house_number')
+            shutil.rmtree('home/ec2-user/images')
+            shutil.rmtree('home/ec2-user/voter_number')
+            shutil.rmtree('home/ec2-user/house_number')
 
-            dir2 = "D:/ocr_production_hosting/pdf"
+            dir2 = "home/ec2-user/pdf"
             shutil.rmtree(dir2)
 
         #     print("Total time spent:", counter+1)
@@ -1646,8 +1646,8 @@ def upload_file():
         final_df2.to_excel('combined_polling_hindi.xlsx', index=False)
         # final_df3 = pd.concat(data_frame_voter, ignore_index=True)
         # final_df3.to_excel('house_number_missing.xlsx', index=False)
-        shutil.rmtree('D:/ocr_production_hosting/data')
-        os.makedirs('D:/ocr_production_hosting/data',exist_ok=True)
+        shutil.rmtree('home/ec2-user/data')
+        os.makedirs('home/ec2-user/data',exist_ok=True)
 
         # df_combined=pd.read_excel(r"D:\ocr_production_hosting\epic_number.xlsx")
         #
